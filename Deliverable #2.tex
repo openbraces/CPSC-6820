@@ -8,7 +8,7 @@
 \usetikzlibrary{shapes.geometric, shapes.misc, positioning, arrows}
 \usepackage{float}
 \usepackage{tabularx}
-\usepackage{hyperref}
+\usepackage[colorlinks=true,urlcolor=blue,bookmarksopen=true]{hyperref}
 \usepackage{ltxtable}
 
 \title{Automatic Pet Feeder\\
@@ -124,17 +124,17 @@ Schedules are set using the microcontroller's online timers. The timer interrupt
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{@{} X X >{\raggedleft\hsize=0.25\hsize}X X @{}}
         \toprule
-        Title                        & Part \#                   & Price & Supplier              \\ \midrule
-        Rocker Switch                & COM-11138                 & 0.55  & Sparkfun              \\ \midrule
-        Joystick with Select Button  & 512                       & 5.95  & Adafruit              \\ \midrule
-        Buzzer                       & PS1240P02BT               & 0.55  & TDK Corporation       \\ \midrule
-        Graphic LCD Display          & NHD-C12832A1Z-NSW-BBW-3V3 & 12.82 & Newhaven Display Intl \\ \midrule
-        WiFi Module                  & ESP32-S2FH4               & 1.48  & Espressif Systems     \\ \midrule
-        Linear actuator              & FIT0803                   & 24.00 & DFRobot               \\ \midrule
-        MSP430FR5994 Microcontroller & MSP-EXP430FR5994          & 20.39 & Texas Instruments     \\ \midrule
-        Force sensor                 & GHF-10                    & 5.86  & UNEO Inc.             \\ \midrule
-        Optical sensor               & VL6180V1NR/1              & 3.37  & STMicroelectronics    \\ \midrule
-                                     &                           & 74.97 &                       \\ \bottomrule
+        Title                                                                                                                          & Part \#                   & Price & Supplier              \\ \midrule
+        \href{https://www.sparkfun.com/rocker-switch-spst-round.html}{Rocker Switch}                                                   & COM-11138                 & 0.55  & Sparkfun              \\ \midrule
+        \href{https://www.adafruit.com/product/512}{Joystick with Select Button}                                                       & 512                       & 5.95  & Adafruit              \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/tdk-corporation/PS1240P02BT/935924}{Buzzer}                                   & PS1240P02BT               & 0.55  & TDK Corporation       \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/newhaven-display-intl/NHD-C12832A1Z-NSW-BBW-3V3/2059235}{Graphic LCD Display} & NHD-C12832A1Z-NSW-BBW-3V3 & 12.82 & Newhaven Display Intl \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S2FH4/14553010}{WiFi Module}                          & ESP32-S2FH4               & 1.48  & Espressif Systems     \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/dfrobot/FIT0803/14824998}{Linear actuator}                                    & FIT0803                   & 24.00 & DFRobot               \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/texas-instruments/MSP-EXP430FR5994/6645208}{MSP430FR5994 Microcontroller}     & MSP-EXP430FR5994          & 20.39 & Texas Instruments     \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/uneo-inc/GHF-10/15657152}{Force sensor}                                       & GHF-10                    & 5.86  & UNEO Inc.             \\ \midrule
+        \href{https://www.digikey.com/en/products/detail/stmicroelectronics/VL6180V1NR-1/7313209}{Optical sensor}                      & VL6180V1NR/1              & 3.37  & STMicroelectronics    \\ \midrule
+                                                                                                                                       &                           & 74.97 &                       \\ \bottomrule
     \end{tabularx}
     \caption{Device part list and their details.}
 \end{table}
