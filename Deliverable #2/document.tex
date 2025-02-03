@@ -34,7 +34,7 @@ The device would be equipped with a Wi-Fi module that sets up a private wireless
 % TODO: Research on MSP430 timer limits and check if a dedicated timer is required.
 Schedules are set using the microcontroller's online timers. The timer interrupts trigger the device to serve food in the container.
 \subsubsection{UI}
-For the UI we decided on using an on off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will give information on setting the device clock, setting the dispense schedule and alerting the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
+The user interface, in summary, would consist of a power on--off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will visualize setting the device clock, the dispense schedule and portion sizes and alert the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/displayframe.pdf}
@@ -128,13 +128,13 @@ For the UI we decided on using an on off switch, a joystick, a buzzer and an LCD
 \end{figure}
 \subsection{Hardware}
 \subsubsection{Sensors}
-The device will have two sensors, a force sensor and an optical sensor. The force sensor is used to measure the amount of food in the bowl before and during dispensing. This will allow the device to dispense the proper amount of food set by the user. The optical sensor is used in order to measure the amount of food left in the storage. This allows the user to be alerted when food is running low so they can refill it.
-\subsubsection{Micro-controller}
-We plan to use the MSP430 in order to control this device. Using this micro-controller allows us to not have to relearn what we will learn in class on a different micro-controller.
+The device will have two sensors, a force sensor and an optical sensor. The force sensor is used to measure the amount of food in the dispense container before and during dispensing. This will allow the device to dispense the proper amount of food set by the user. The optical sensor is used in order to measure the amount of food left in the storage. This allows the user to be alerted when food is running low so they can refill it.
+\subsubsection{Microcontroller}
+We plan to use MSP430FR5994 in order to control this device. Using this microcontroller eases the workload since we can reuse the knowledge of the MCU we learned in class.
 \subsubsection{Actuator}
-On this device will be a linear actuator that will be in charge of opening and closing the dispenser. We made sure to choose one that can handle enough force to reliably hold the weight of the food.
+The device will be equipped with a linear actuator that will be in charge of opening and closing the dispenser. We made sure to choose one that can handle enough force to reliably hold the weight of the food.
 \subsubsection{Wireless communication protocol}
-For our wireless component we decided to use a wifi module. This module is going to be setup using the user's mobile device, from then on it will allow the device to communicate with our server.
+For our wireless component we decided to use a Wi-Fi module. This module will be used to connect to the user's home network and communicate with the web server.
 \subsection{Parts}
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{@{} X X >{\raggedleft\hsize=0.25\hsize}X X @{}}
