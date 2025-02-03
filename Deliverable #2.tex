@@ -6,6 +6,10 @@
 \usepackage{lscape}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, shapes.misc, positioning, arrows}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{ltxtable}
 
 \title{Automatic Pet Feeder\\
 \large CPSC-6820 Deliverable \#2---System Overview Document}
@@ -21,8 +25,16 @@ It feels terrible to realize we did not feed our pets---whether it is because we
 
 \section{System Description}
 \subsection{Software}
+The device's main loop can be logically divided into three phases: reading from and writing to I/O---including rendering on-device display based on button inputs and activating the buzzer, pushing device state to the web server and updating the local state from the web server's state, setting the timers based on the schedules and dispensing food when the timers are triggered. The following sections lay out more details of these phases.
+\subsubsection{Device I/O}
+For the device to be self-sufficient without internet connectivity, the on-device display needs to act as a comprehensive user interface. <figure> shows the planned frame layout. The frame consists of a number input at the center to take schedule times and portion sizes as inputs, icons on the left---including internet connectivity indicator, storage level indicator and schedule identifier. The schedule identifier can be toggled to view or edit multiple schedules, each of which is identified by the identifier. The display would be controlled using a joystick--select button combo input and a buzzer would be fired to alert the pet/user when dispensing food.
+\subsubsection{Web Interoperation}
+The device would be equipped with a Wi-Fi module that sets up a private wireless network to pair with a mobile device, which needs a client app installed. The user's home network credentials will then be exchanged with the device for it to establish a connection with the network. Once this step succeeds, the device would be ready to go online and synchronize device state with data on the server. This includes the device clock and the dispense schedule and portion sizes. From this point, the device would push activity data to the server---which would be used by the mobile app, for instance, to notify the user when food is dispensed or if the storage level is low.
+\subsubsection{Scheduling and Dispensing}
+% TODO: Research on MSP430 timer limits and check if a dedicated timer is required.
+Schedules are set using the microcontroller's online timers. The timer interrupts trigger the device to serve food in the container.
 \subsection{State Machine}
-\begin{figure}
+\begin{figure}[H]
     \centering
     \tikzstyle{terminal} = [rounded rectangle,
     minimum width=5em,
@@ -58,12 +70,12 @@ It feels terrible to realize we did not feed our pets---whether it is because we
     draw,
     fill=orange!10]
     \tikzstyle{arrow} = [->,>=stealth]
-    \begin{tikzpicture}[node distance=2.5em]
+    \begin{tikzpicture}[node distance=2.25em]
         \node (start) [terminal] {Start};
         \node (inclock) [io, below=of start, text width=2.5cm] {Time input to set device clock};
         \node (inschedule) [io, below=of inclock, text width=3.5cm] {Dispense schedule and portion size input};
 
-        \node (netcond) [decision, right=of start, text width=2.5cm] {Connected to internet?};
+        \node (netcond) [decision, right=1.5 of start, text width=2.5cm] {Connected to internet?};
         \node (srvconn) [process, below=of netcond] {Connect to server and fetch data};
 
         \node (wait) [terminal, below=of inschedule] {Wait};
@@ -89,7 +101,7 @@ It feels terrible to realize we did not feed our pets---whether it is because we
         \draw [arrow] (start) -- (netcond);
         \draw [arrow] (netcond.east) -- node[above] {Yes} +(0.5,0) |- (srvconn);
         \draw [arrow] (netcond) |- node[right] {No} (inclock);
-        \draw [arrow] (srvconn) -- +(0,-2) -| (wait);
+        \draw [arrow] (srvconn) -- +(0,-1.75) -| (wait);
 
         \draw [arrow] (wait) -- node[left] {Timer trigger} (predispchk);
         \draw [arrow] (predispchk) -- (predispcond);
@@ -105,26 +117,26 @@ It feels terrible to realize we did not feed our pets---whether it is because we
         \draw [arrow] (dispfood) -- (dispalrt);
         \draw [arrow] (dispalrt) -- (stop);
     \end{tikzpicture}
+    \caption{Automatic Pet Feeder's state machine.}
 \end{figure}
 \subsection{Hardware}
 \subsection{Parts}
-\begin{landscape}
-    \begin{table}[]
-        \begin{tabular*}{\linewidth}{@{}p{0.2\linewidth}p{0.2\linewidth}p{0.225\linewidth}>{\raggedleft}p{0.075\linewidth}p{0.15\linewidth}@{}}
-            \toprule
-            Title & Part \# & Supplier & Price & Description \\ \midrule
-            Rocker Switch & COM-11138 & Sparkfun & 0.55 & On-off switch \\ \midrule
-            Joystick with Select Button & 512 & Adafruit & 5.95 & Navigation and confirmation button combo \\ \midrule
-            Buzzer & PS1240P02BT & TDK Corporation & 0.55 &  \\ \midrule
-            Graphic LCD Display & NHD-C12832A1Z-NSW-BBW-3V3 & Newhaven Display Intl & 12.82 &  \\ \midrule
-            WiFi Module & ESP32-S2FH4 & Espressif Systems & 1.48 &  \\ \midrule
-            Linear actuator & FIT0803 & DFRobot & 24.00 & To open/close the dispenser \\ \midrule
-            MSP430FR5994 Microcontroller & MSP-EXP430FR5994 & Texas Instruments & 20.39 &  \\ \midrule
-            Force sensor & GHF-10 & UNEO Inc. & 5.86 &  \\ \midrule
-            Optical sensor & VL6180V1NR/1 & STMicroelectronics & 3.37 &  \\ \midrule
-            &  &  & 74.97 &  \\ \bottomrule
-        \end{tabular*}
-    \end{table}
-\end{landscape}
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{@{} X X >{\raggedleft\hsize=0.25\hsize}X X @{}}
+        \toprule
+        Title                        & Part \#                   & Price & Supplier              \\ \midrule
+        Rocker Switch                & COM-11138                 & 0.55  & Sparkfun              \\ \midrule
+        Joystick with Select Button  & 512                       & 5.95  & Adafruit              \\ \midrule
+        Buzzer                       & PS1240P02BT               & 0.55  & TDK Corporation       \\ \midrule
+        Graphic LCD Display          & NHD-C12832A1Z-NSW-BBW-3V3 & 12.82 & Newhaven Display Intl \\ \midrule
+        WiFi Module                  & ESP32-S2FH4               & 1.48  & Espressif Systems     \\ \midrule
+        Linear actuator              & FIT0803                   & 24.00 & DFRobot               \\ \midrule
+        MSP430FR5994 Microcontroller & MSP-EXP430FR5994          & 20.39 & Texas Instruments     \\ \midrule
+        Force sensor                 & GHF-10                    & 5.86  & UNEO Inc.             \\ \midrule
+        Optical sensor               & VL6180V1NR/1              & 3.37  & STMicroelectronics    \\ \midrule
+                                     &                           & 74.97 &                       \\ \bottomrule
+    \end{tabularx}
+    \caption{Device part list and their details.}
+\end{table}
 \section{Resources, References and Appendix}
 \end{document}
