@@ -33,6 +33,13 @@ The device would be equipped with a Wi-Fi module that sets up a private wireless
 \subsubsection{Scheduling and Dispensing}
 % TODO: Research on MSP430 timer limits and check if a dedicated timer is required.
 Schedules are set using the microcontroller's online timers. The timer interrupts trigger the device to serve food in the container.
+\subsubsection{UI}
+For the UI we decided on using an on off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will give information on setting the device clock, setting the dispense schedule and alerting the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/displayframe.pdf}
+    \caption{Display UI}
+\end{figure}
 \subsection{State Machine}
 \begin{figure}[H]
     \centering
@@ -126,11 +133,8 @@ The device will have two sensors, a force sensor and an optical sensor. The forc
 We plan to use the MSP430 in order to control this device. Using this micro-controller allows us to not have to relearn what we will learn in class on a different micro-controller.
 \subsubsection{Actuator}
 On this device will be a linear actuator that will be in charge of opening and closing the dispenser. We made sure to choose one that can handle enough force to reliably hold the weight of the food.
-\subsubsection{UI}
-For the UI we decided on using an on off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will give information on setting the device clock, setting the dispense schedule and alerting the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
 \subsubsection{Wireless communication protocol}
 For our wireless component we decided to use a wifi module. This module is going to be setup using the user's mobile device, from then on it will allow the device to communicate with our server.
-
 \subsection{Parts}
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{@{} X X >{\raggedleft\hsize=0.25\hsize}X X @{}}
@@ -149,8 +153,6 @@ For our wireless component we decided to use a wifi module. This module is going
     \end{tabularx}
     \caption{Device part list and their details.}
 \end{table}
-
 \section{Demo}
-
 \section{Resources, References and Appendix}
 \end{document}
