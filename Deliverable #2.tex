@@ -4,6 +4,8 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{lscape}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc, positioning, arrows}
 
 \title{Automatic Pet Feeder\\
 \large CPSC-6820 Deliverable \#2---System Overview Document}
@@ -15,11 +17,95 @@
 \maketitle
 
 \section{Executive Summary}
-It is not a good feeling to realize you did not feed your pet---whether it is because you were running late and were in a hurry or had too much on your mind and forgot about it. Times like these are when the Automatic Pet Feeder comes in handy. It comes with a nifty set of features to take care of your pet feeding needs including---the ability to set multiple food dispense times a day, on-device dispense schedule settings, Wi-Fi and Bluetooth connectivity to pair your mobile devices, a mobile app to receive notifications and view logs as well as to set the dispense schedule and the ability to set dispense quantities per each dispense time. Mobile device connectivity is fully optional and is intended for the user to check logs and remotely edit the dispense schedule.
+It feels terrible to realize we did not feed our pets---whether it is because we were running late and were in a hurry or had too much on our mind and forgot about it. Times like these are when the Automatic Pet Feeder comes in handy. It comes with a nifty set of features to take care of your pet feeding needs including---the ability to set multiple food dispense times a day, on-device dispense schedule settings, internet connectivity to pair your mobile devices and publish logs, a mobile app to receive notifications and view logs as well as to set the dispense schedule and the ability to set dispense quantities per each dispense time. Internet connectivity is completely optional and is helpful to check logs and remotely edit the dispense schedule.
 
 \section{System Description}
 \subsection{Software}
 \subsection{State Machine}
+\begin{figure}
+    \centering
+    \tikzstyle{terminal} = [rounded rectangle,
+    minimum width=5em,
+    minimum height=2em,
+    text centered,
+    draw,
+    fill=red!10]
+
+    \tikzstyle{io} = [trapezium,
+    trapezium stretches=true,
+    trapezium left angle=-75,
+    trapezium right angle=-75,
+    minimum width=7.5em,
+    minimum height=2.5em,
+    text centered,
+    draw,
+    fill=blue!10]
+
+    \tikzstyle{process} = [rectangle,
+    minimum width=7.5em,
+    minimum height=2.5em,
+    text centered,
+    text width=3cm,
+    draw,
+    fill=gray!20]
+
+    \tikzstyle{decision} = [diamond,
+    minimum width=2.5em,
+    minimum height=2.5em,
+    aspect=1.5,
+    inner sep=1,
+    text centered,
+    draw,
+    fill=orange!10]
+    \tikzstyle{arrow} = [->,>=stealth]
+    \begin{tikzpicture}[node distance=2.5em]
+        \node (start) [terminal] {Start};
+        \node (inclock) [io, below=of start, text width=2.5cm] {Time input to set device clock};
+        \node (inschedule) [io, below=of inclock, text width=3.5cm] {Dispense schedule and portion size input};
+
+        \node (netcond) [decision, right=of start, text width=2.5cm] {Connected to internet?};
+        \node (srvconn) [process, below=of netcond] {Connect to server and fetch data};
+
+        \node (wait) [terminal, below=of inschedule] {Wait};
+
+        \node (predispchk) [process, below=of wait] {Check remaining food in storage};
+        \node (predispcond) [decision, below=of predispchk, text width=2.5cm] {Sufficient food in storage?};
+        \node (predispwarn) [io, right=of predispcond, text width=2.5cm] {Alert the user and display indicator};
+
+        \node (dispfood) [process, below=of predispcond] {Dispense food---portion size minus leftovers in the dispense container};
+
+        \node (dispalrt) [io, below=of dispfood] {Notify the user};
+
+        \node (postdispchk) [process, left=of dispalrt] {Check remaining food in storage};
+        \node (postdispcond) [decision, above=of postdispchk, text width=2.5cm] {Sufficient food in storage?};
+        \node (postdispwarn) [io, above=of postdispcond, text width=2.5cm] {Alert the user and display indicator};
+
+        \node (stop) [terminal, below=of dispalrt] {Stop};
+
+        \draw [arrow] (start) -- (inclock);
+        \draw [arrow] (inclock) -- (inschedule);
+        \draw [arrow] (inschedule) -- (wait);
+
+        \draw [arrow] (start) -- (netcond);
+        \draw [arrow] (netcond.east) -- node[above] {Yes} +(0.5,0) |- (srvconn);
+        \draw [arrow] (netcond) |- node[right] {No} (inclock);
+        \draw [arrow] (srvconn) -- +(0,-2) -| (wait);
+
+        \draw [arrow] (wait) -- node[left] {Timer trigger} (predispchk);
+        \draw [arrow] (predispchk) -- (predispcond);
+        \draw [arrow] (predispcond) -- node[left] {Yes} (dispfood);
+        \draw [arrow] (predispcond) -- node[above] {No} (predispwarn);
+        \draw [arrow] (predispwarn) |- (wait);
+
+        \draw [arrow] (dispalrt) -- (postdispchk);
+        \draw [arrow] (postdispchk) -- (postdispcond);
+        \draw [arrow] (postdispcond) -- node[left] {No} (postdispwarn);
+        \draw [arrow] (postdispwarn) |- (wait);
+
+        \draw [arrow] (dispfood) -- (dispalrt);
+        \draw [arrow] (dispalrt) -- (stop);
+    \end{tikzpicture}
+\end{figure}
 \subsection{Hardware}
 \subsection{Parts}
 \begin{landscape}
