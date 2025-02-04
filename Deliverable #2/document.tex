@@ -32,13 +32,14 @@ For the device to be self-sufficient without internet connectivity, the on-devic
 The device would be equipped with a Wi-Fi module that sets up a private wireless network to pair with a mobile device, which needs a client app installed. The user's home network credentials will then be exchanged with the device for it to establish a connection with the network. Once this step succeeds, the device would be ready to go online and synchronize device state with data on the server. This includes the device clock and the dispense schedule and portion sizes. From this point, the device would push activity data to the server---which would be used by the mobile app, for instance, to notify the user when food is dispensed or if the storage level is low.
 \subsubsection{Scheduling and Dispensing}
 % TODO: Research on MSP430 timer limits and check if a dedicated timer is required.
-Schedules are set using the microcontroller's online timers. The timer interrupts trigger the device to serve food in the container.
+Schedules are set using the microcontroller's online timers and TI's RTC library. The timer interrupts trigger the device to serve food in the container.
 \subsubsection{UI}
-The user interface, in summary, would consist of a power on--off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will visualize setting the device clock, the dispense schedule and portion sizes and alert the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
+The device's user interface would consist of a power on--off switch, a joystick, a buzzer and an LCD display. The joy stick will be used by the user to control selection on the LCD display. The LCD display will visualize setting the device clock, the dispense schedule and portion sizes and alert the user of warnings. The buzzer is used in order to alert the user or pet when food is being dispensed.
 
+Besides this, a companion mobile app will be developed to achieve the same functionality remotely, while accessing device logs.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/displayframe.pdf}
-    \caption{Display UI}
+    \caption{Device display prototype.}
 \end{figure}
 \subsection{State Machine}
 \begin{figure}[H]
@@ -151,9 +152,15 @@ For our wireless component we decided to use a Wi-Fi module. This module will be
         \href{https://www.digikey.com/en/products/detail/stmicroelectronics/VL6180V1NR-1/7313209}{Optical sensor}                      & VL6180V1NR/1              & 3.37  & STMicroelectronics    \\ \midrule
                                                                                                                                        &                           & 74.97 &                       \\ \bottomrule
     \end{tabularx}
-    \caption{Device part list and their details.}
+    \caption{Device part list and details.}
 \end{table}
 \section{Demo}
-For the demo we would bring the device and show it by placing it on a table. The next step would be to show how to fill the device with food and set the bowl up to receive the food. We would then plug it into our laptop (or battery), then turn it on. Now that we have done this we can show the setup phase, this will involve turning the device on, and setting up the WIFI. Once we have set the WIFI up we can then set the feeding schedule, for the sake of our demo we would set it to be a time close to the current time. The last setup step is to put the desired amount of food (in weight) into the system, that will be the amount of food dispensed at each time interval. Now we simply wait until the time we set and the feeder should automatically dispense the correct amount of food.
+The demo would begin with us showing the audience the design and features of the device. We would then fill the storage with food, set the dispense container up to collect the food and power the device on. Once done, we would demonstrate the setup phase---which will involve pairing the device with user's mobile and connecting it to a wireless network, followed by setting the feeding schedule and portion sizes. For demonstration purposes, we would set short time intervals to show the functionality. Finally, once everything is set up, we show the device alerting and dispensing the food on time, as well as pushing notifications to the user's mobile device.
 \section{Resources, References and Appendix}
+\begin{itemize}
+    \item \href{https://www.ti.com/lit/an/slaa290a/slaa290a.pdf}{TI---Using the Real-Time Clock Library}
+    \item \href{https://software-dl.ti.com/trainingTTO/trainingTTO_public_sw/MSP430_LaunchPad_Workshop/v4/Chapters/MSP430m06_TIMERS.pdf}{TI---Timers}
+    \item \href{https://www.ti.com/video/series/msp430-workshop.html}{TI---MSP430 workshop}
+    \item \href{https://e2e.ti.com/support/microcontrollers/msp-low-power-microcontrollers-group/msp430/f/msp-low-power-microcontroller-forum/670685/ccs-msp430fr5994-how-to-set-up-the-alarm-in-rtc-module}{TI forums---Setting up alarms using RTC library}
+\end{itemize}
 \end{document}
