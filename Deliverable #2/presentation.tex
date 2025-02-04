@@ -1,4 +1,15 @@
 \documentclass{beamer}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{lscape}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.misc, positioning, arrows}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{ltxtable}
+
 \title{Automatic Pet Feeder\\
 \small CPSC-6820 Deliverable \#2\\
 \large System Overview Presentation}
@@ -8,11 +19,84 @@
 
 \begin{document}
 
+% Introduce ourselves
 \frame{\titlepage}
-
+% What the project is, features in brief, why we're doing it
 \begin{frame}
-    \frametitle{Hello!}
-    This is some text in the first frame. This is some text in the first frame. This is some text in the first frame.
+    \frametitle{What and why?}
+
+    \begin{minipage}{0.5\textwidth}
+        What?
+        \begin{itemize}
+            \item Automatic Pet Feeder
+            \item Set-and-forget food dispenser for pets
+        \end{itemize}
+        Features:
+        \begin{itemize}
+            \item Multiple schedules and portion sizes per schedule
+            \item Wireless connectivity, user alerts and stats
+            \item Replaceable dispense containers
+        \end{itemize}
+        Why?
+        \begin{itemize}
+            \item Don't miss feeding your pets again!
+            \item Privacy and wallet friendly
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+        \begin{figure}
+            \centering
+            \scalebox{.4}{\input{statemachine.tex}}
+        \end{figure}
+    \end{minipage}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Software and UI}
+    \begin{itemize}
+        \item Scheduling using MSP430 timers and RTC library
+        \item I/O and display control logic
+        \item Web server and app implementation and device communication logic
+    \end{itemize}
+    \begin{figure}[h]
+        \includegraphics[width=\textwidth]{images/displayframe.pdf}
+        \caption{Display UI prototype}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Hardware}
+    \begin{table}[H]
+        \small
+        \begin{tabularx}{\linewidth}{@{} X >{\raggedleft\arraybackslash\hsize=0.25\hsize}X @{}}
+            \toprule
+            Part                         & Price \\ \midrule
+            Rocker Switch                & 0.55  \\ \midrule
+            Joystick with Select Button  & 5.95  \\ \midrule
+            Buzzer                       & 0.55  \\ \midrule
+            Graphic LCD Display          & 12.82 \\ \midrule
+            WiFi Module                  & 1.48  \\ \midrule
+            Linear actuator              & 24.00 \\ \midrule
+            MSP430FR5994 Microcontroller & 20.39 \\ \midrule
+            Force sensor                 & 5.86  \\ \midrule
+            Optical sensor               & 3.37  \\ \midrule
+                                         & 74.97 \\ \bottomrule
+        \end{tabularx}
+    \end{table}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stretch Goals}
+    \begin{itemize}
+        \item Storage partitioning and different types of food
+        \item Battery-powered operation
+        \item Keeping track of pet's eating habits
+        \item Pet-lock function
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conclusion}
+    Questions?
+\end{frame}
 \end{document}
