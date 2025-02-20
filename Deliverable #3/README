@@ -1,0 +1,14 @@
+CPSC-6820 Deliverable #3
+Team: Happy Pets
+Teammates: Sriram Vishnubhotla, Logan Swoyer
+Project: Automatic Pet Feeder
+Project Repository: https://github.com/hexlambda/CPSC-6820/
+Project Overview: A pet feeding device with fine-grained scheduling settings and mobile connectivity.
+Parts:
+Piezoelectric Buzzer (PS1240P02BT)
+Joystick (512)
+Load Cell Amplifier (SEN-13879)
+Microcontroller (MSP430FR5994)
+OLED Display + Breakout board (SSD1306)
+Proximity Sensor (VL6180V1NR)
+WiFi Module + Breakout board (WINC1500)
