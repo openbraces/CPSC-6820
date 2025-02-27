@@ -1,3 +1,6 @@
 [submodule "SparkFun-Eagle-Libraries"]
 	path = SparkFun-Eagle-Libraries
 	url = https://github.com/sparkfun/SparkFun-Eagle-Libraries
+[submodule "Automatic Pet Feeder/Parts/SparkFun_Qwiic_OLED_1.3in"]
+	path = Automatic Pet Feeder/Parts/SparkFun_Qwiic_OLED_1.3in
+	url = https://github.com/sparkfun/SparkFun_Qwiic_OLED_1.3in

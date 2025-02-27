@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 0)
+  (lib (name "Automatic Pet Feeder-eagle-import")(type "KiCad")(uri "${KIPRJMOD}/Automatic Pet Feeder-eagle-import.kicad_sym")(options "")(descr ""))
+)

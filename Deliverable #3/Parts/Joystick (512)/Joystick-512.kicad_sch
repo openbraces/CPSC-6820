@@ -1,11 +1,11 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "9be61282-127d-4151-88f8-40eefcfa99dd")
 	(paper "A4")
 	(lib_symbols
-		(symbol "joystick-eagle-import:adafruit_JOYSTICKPTH"
+		(symbol "Joystick-512:adafruit_JOYSTICKPTH"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -67,18 +67,6 @@
 			(symbol "adafruit_JOYSTICKPTH_1_0"
 				(polyline
 					(pts
-						(xy -7.62 -15.24) (xy -7.62 12.7)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -7.62 12.7) (xy 5.08 12.7)
 					)
 					(stroke
@@ -91,7 +79,7 @@
 				)
 				(polyline
 					(pts
-						(xy 5.08 -15.24) (xy -7.62 -15.24)
+						(xy -7.62 -15.24) (xy -7.62 12.7)
 					)
 					(stroke
 						(width 0.254)
@@ -113,6 +101,18 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 5.08 -15.24) (xy -7.62 -15.24)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(text "JOYSTICK"
 					(at 3.302 -7.366 900)
 					(effects
@@ -123,16 +123,16 @@
 					)
 				)
 				(pin bidirectional line
-					(at -10.16 -10.16 0)
+					(at -10.16 10.16 0)
 					(length 2.54)
-					(name "SEL+"
+					(name "V+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "B1A"
+					(number "V1"
 						(effects
 							(font
 								(size 0 0)
@@ -141,16 +141,34 @@
 					)
 				)
 				(pin bidirectional line
-					(at -10.16 -12.7 0)
+					(at -10.16 7.62 0)
 					(length 2.54)
-					(name "SEL-"
+					(name "V"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "B2A"
+					(number "V2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -10.16 5.08 0)
+					(length 2.54)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "V3"
 						(effects
 							(font
 								(size 0 0)
@@ -213,16 +231,16 @@
 					)
 				)
 				(pin bidirectional line
-					(at -10.16 10.16 0)
+					(at -10.16 -10.16 0)
 					(length 2.54)
-					(name "V+"
+					(name "SEL+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "V1"
+					(number "B1A"
 						(effects
 							(font
 								(size 0 0)
@@ -231,34 +249,16 @@
 					)
 				)
 				(pin bidirectional line
-					(at -10.16 7.62 0)
+					(at -10.16 -12.7 0)
 					(length 2.54)
-					(name "V"
+					(name "SEL-"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "V2"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -10.16 5.08 0)
-					(length 2.54)
-					(name "V-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "V3"
+					(number "B2A"
 						(effects
 							(font
 								(size 0 0)
@@ -267,8 +267,9 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
-		(symbol "joystick-eagle-import:pinhead_PINHD-1X5"
+		(symbol "Joystick-512:pinhead_PINHD-1X5"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -328,18 +329,6 @@
 			(symbol "pinhead_PINHD-1X5_1_0"
 				(polyline
 					(pts
-						(xy -6.35 -7.62) (xy 1.27 -7.62)
-					)
-					(stroke
-						(width 0.4064)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -6.35 7.62) (xy -6.35 -7.62)
 					)
 					(stroke
@@ -352,7 +341,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -7.62) (xy 1.27 7.62)
+						(xy -6.35 -7.62) (xy 1.27 -7.62)
 					)
 					(stroke
 						(width 0.4064)
@@ -365,6 +354,18 @@
 				(polyline
 					(pts
 						(xy 1.27 7.62) (xy -6.35 7.62)
+					)
+					(stroke
+						(width 0.4064)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -7.62) (xy 1.27 7.62)
 					)
 					(stroke
 						(width 0.4064)
@@ -465,6 +466,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -696,7 +698,7 @@
 		(uuid "fa637ea2-962a-4e31-a4eb-48cee55097e8")
 	)
 	(symbol
-		(lib_id "joystick-eagle-import:adafruit_JOYSTICKPTH")
+		(lib_id "Joystick-512:adafruit_JOYSTICKPTH")
 		(at 160.02 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -785,7 +787,7 @@
 		)
 	)
 	(symbol
-		(lib_id "joystick-eagle-import:pinhead_PINHD-1X5")
+		(lib_id "Joystick-512:pinhead_PINHD-1X5")
 		(at 132.08 101.6 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -868,4 +870,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
