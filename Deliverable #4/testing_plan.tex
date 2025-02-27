@@ -23,6 +23,6 @@ For the OLED display there is an example we found that provides code for testing
 \subsection{Ultrasonic Detector}
 For the proximity detector it works by sending a pulse, then we check the amount of time for the pulse to come back to sensor. Then we calculate the distance with the formula provided by the datasheet that is $distance(cm) = \mu s /58$. So in order to test that it is working as expected we can measure out 5cm and place the sensor and an object that distance apart, if the reading is around 5cm we have a working part.
 \subsection{Wifi Module}
-In order to get the wifi module to work we need some software to write to it. The software used in an example we found was Toolchain to compile code, CMake and Ninja to build a full Application, and ESP-IDF that contains API for ESP32-C6. Once we have the software installed we can flash the firmware for the ESP-32, then we have to write code for the ESP32 and the MSP-430 in order to communicate between the two. (We are thinking of just using the ESP32 but for the sake of this deliverable we are still including the MSP-430). 
+In order to get the wifi module to work we need some software to write to it. We could write simple testing code to flash to ESP32 to test the dev kit. Once we make sure the dev kit is functional, we could write code to communicate between the ESP32 and MSP430. We are thinking of just using the ESP32 but for the sake of this deliverable we are still including the MSP-430.
 
 \end{document}

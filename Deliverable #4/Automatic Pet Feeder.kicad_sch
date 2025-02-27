@@ -4358,6 +4358,47 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "Team Happy Pets\nAutomatic Pet Feeder\nSriram Vishnubhotla, Logan Swoyer"
+		(exclude_from_sim no)
+		(at 313.436 243.84 0)
+		(effects
+			(font
+				(size 1.651 1.651)
+			)
+			(justify left)
+		)
+		(uuid "47cb37f7-02de-41f6-821a-59a7af06c241")
+	)
+	(text "0.1"
+		(exclude_from_sim no)
+		(at 405.384 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "8e6ef823-70fb-4c6e-9779-a3ee9e1c1cab")
+	)
+	(text "2025-02-27"
+		(exclude_from_sim no)
+		(at 348.234 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "8f3e21ff-0eae-4370-9c3d-e849522eaddd")
+	)
+	(text "Automatic Pet Feeder"
+		(exclude_from_sim no)
+		(at 332.232 259.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "dc0f3762-379a-4d54-805b-34ef9dfa5a07")
+	)
 	(junction
 		(at 386.08 135.89)
 		(diameter 0)
