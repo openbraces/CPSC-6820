@@ -1,0 +1,10 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Parts")(type "KiCad")(uri "${KIPRJMOD}/Parts.pretty")(options "")(descr ""))
+  (lib (name "Espressif")(type "KiCad")(uri "${KIPRJMOD}/Espressif.pretty")(options "")(descr ""))
+  (lib (name "Joystick-512")(type "Eagle")(uri "${KIPRJMOD}/Parts/Joystick-512.lbr")(options "")(descr ""))
+  (lib (name "OLED_1.3in")(type "Eagle")(uri "${KIPRJMOD}/Parts/OLED_1.3in.lbr")(options "")(descr ""))
+  (lib (name "Qwiic_OLED_1.3in")(type "Eagle")(uri "${KIPRJMOD}/Parts/Qwiic_OLED_1.3in.lbr")(options "")(descr ""))
+  (lib (name "Ultrasonic Sensor HC-SR04")(type "Eagle")(uri "${KIPRJMOD}/Parts/Ultrasonic Sensor HC-SR04.lbr")(options "")(descr ""))
+  (lib (name "MSP430FR5994")(type "KiCad")(uri "${KIPRJMOD}/Parts/MSP430FR5994.pretty")(options "")(descr ""))
+)
