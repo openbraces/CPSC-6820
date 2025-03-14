@@ -3589,6 +3589,17 @@
 		(layer "Edge.Cuts")
 		(uuid "0dd44404-ad52-4346-8863-0fe791bb545a")
 	)
+	(gr_text "PawPlans - Automatic Pet Feeder v0.5.0\nSriram Vishnubhotla, Logan Swoyer, Jacob Sorber\nClemson University"
+		(at 89.6 31.2 0)
+		(layer "F.SilkS")
+		(uuid "a3b9e799-25a0-4346-abf4-fca6cd99c276")
+		(effects
+			(font
+				(size 0.5 0.5)
+				(thickness 0.0625)
+			)
+		)
+	)
 	(segment
 		(start 115.57 36.76346)
 		(end 115.57 41.82346)
