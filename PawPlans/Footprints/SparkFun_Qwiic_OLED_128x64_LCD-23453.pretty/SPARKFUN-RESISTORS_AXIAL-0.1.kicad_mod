@@ -1,0 +1,118 @@
+(footprint "SPARKFUN-RESISTORS_AXIAL-0.1"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "AXIAL-0.1\n\nCommonly used for 1/4W through-hole resistors. 0.1\" pitch between holes.")
+	(property "Reference" "REF**"
+		(at 0 -1.143 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "95cc3fcd-4f8e-41cb-a164-3a6d1e262af1")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify bottom)
+		)
+	)
+	(property "Value" "SPARKFUN-RESISTORS_AXIAL-0.1"
+		(at 0 1.143 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "48c39d3e-96d3-41bb-8de3-3006c1ceec01")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify top)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b10e513d-76a0-4dff-94f5-4402051cb80f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "eda20dc3-b213-4acc-9aeb-d89e3fe04cfa")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_line
+		(start 0 0)
+		(end -0.254 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "07c6c428-2240-4c4d-b3d4-2daf4fc18277")
+	)
+	(fp_line
+		(start 0 0)
+		(end 0 -0.762)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "36d32f56-98d8-458e-94e2-d85dedd21935")
+	)
+	(fp_line
+		(start 0 0.762)
+		(end 0 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e97e2919-a307-474a-9505-56f41ee45493")
+	)
+	(fp_line
+		(start 0.254 0)
+		(end 0 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f65c5291-9b06-4f8b-8f40-64409bcefd3b")
+	)
+	(pad "P$1" thru_hole circle
+		(at -1.27 0)
+		(size 1.8796 1.8796)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "d125576f-2782-4eef-b682-142a433f406b")
+	)
+	(pad "P$2" thru_hole circle
+		(at 1.27 0)
+		(size 1.8796 1.8796)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "f35845ed-b725-429b-94a9-d064d73a91bf")
+	)
+	(embedded_fonts no)
+)

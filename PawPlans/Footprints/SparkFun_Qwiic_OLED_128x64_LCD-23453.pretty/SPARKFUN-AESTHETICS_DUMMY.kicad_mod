@@ -1,0 +1,54 @@
+(footprint "SPARKFUN-AESTHETICS_DUMMY"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Dummy Footprint\n\nNOTHING HERE!!! For when you want a symbol with no package as an option against symbols with a package.\n\nDevices using:\n\n• BADGERHACK_LOGO\n• FRAME-LETTER")
+	(property "Reference" ""
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "a17688ff-8730-4fc5-b040-ae197ac46174")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "58f1e94d-1d1c-4725-8570-a583ac29c825")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "95fea3b4-8572-4dd2-908a-1e8cfb75fa88")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8f82f702-ae0a-476a-882d-cb0e5f909999")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

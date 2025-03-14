@@ -1,0 +1,188 @@
+(footprint "HC-SR04_FOOTPRINT"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Ultrasonic Sensor HC-SR04 Footprint")
+	(property "Reference" "REF**"
+		(at -2.032 5.08 90)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "fd5ed25f-89a9-427b-9f45-e382754421b5")
+		(effects
+			(font
+				(size 0.89408 0.89408)
+				(thickness 0.12192)
+			)
+			(justify left bottom)
+		)
+	)
+	(property "Value" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "76e903f8-d7b0-4db9-a52e-272735f45196")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "93e0fe15-322c-4c73-9761-b2fddb9d2300")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ae1d0052-b7d6-48a8-956d-eb5f2b88fbd3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_line
+		(start -1.27 -5.08)
+		(end -1.27 5.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "dea11aeb-3e19-4a3d-a011-5f9ed334c06e")
+	)
+	(fp_line
+		(start -1.27 5.08)
+		(end 1.27 5.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6b732766-95a4-4f29-8ac0-40f613878d96")
+	)
+	(fp_line
+		(start 1.27 -5.08)
+		(end -1.27 -5.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "dac753c3-c0ed-4251-a798-ca7ba82175b9")
+	)
+	(fp_line
+		(start 1.27 5.08)
+		(end 1.27 -5.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b1adc3c0-5b59-427f-80dc-9a3121d22837")
+	)
+	(fp_text user "VCC"
+		(at 1.397 4.064 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "1e78d97b-e56d-423c-9e90-7c0e8d425526")
+		(effects
+			(font
+				(size 0.560832 0.560832)
+				(thickness 0.048768)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "Echo"
+		(at 1.397 -1.016 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "b0ea5fe9-20af-4ee2-821f-e87eb2481fd9")
+		(effects
+			(font
+				(size 0.560832 0.560832)
+				(thickness 0.048768)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "Trig"
+		(at 1.397 1.524 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "e50a2d80-36ea-4c5b-aecf-ac0b1cfa863a")
+		(effects
+			(font
+				(size 0.560832 0.560832)
+				(thickness 0.048768)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "GND"
+		(at 1.397 -3.556 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "e62faec5-295a-4cd0-8454-3b55e334cd3d")
+		(effects
+			(font
+				(size 0.560832 0.560832)
+				(thickness 0.048768)
+			)
+			(justify left bottom)
+		)
+	)
+	(pad "ECHO" thru_hole circle
+		(at 0 -1.27)
+		(size 1.778 1.778)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "42f5044c-8284-4647-8d2d-37026c56144a")
+	)
+	(pad "GND" thru_hole rect
+		(at 0 -3.81)
+		(size 1.778 1.778)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "69b90ec9-44ba-490b-a485-0afec9d68a54")
+	)
+	(pad "TRIG" thru_hole circle
+		(at 0 1.27)
+		(size 1.778 1.778)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "fa6be3c9-2893-4393-b1d3-f605a1597146")
+	)
+	(pad "VCC" thru_hole circle
+		(at 0 3.81)
+		(size 1.778 1.778)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "3975a2f7-e983-4200-b3ee-428b72076af6")
+	)
+	(embedded_fonts no)
+)

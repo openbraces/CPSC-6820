@@ -1,0 +1,76 @@
+(footprint "SPARKFUN-HARDWARE_STAND-OFF-TIGHT"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Standoff (#4 Screw) - Tight fit around screw body\n\nThis is the mechanical footprint for a #4 phillips button head screw. Use the keepout ring to avoid running the screw head into surrounding components.\n\nDevices Using\n\n• STAND-OFF")
+	(property "Reference" "REF**"
+		(at 0 -1.651 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "fa274b52-2992-4280-9e01-73200700ab47")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify bottom)
+		)
+	)
+	(property "Value" "SPARKFUN-HARDWARE_STAND-OFF-TIGHT"
+		(at 0 1.651 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "15cd93ef-725d-49c7-925b-a5f855f57187")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify top)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2b416d16-e286-4de9-8ab5-5ec05bf125a5")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8d155fc2-4d8f-4e46-a46a-7a73254a72cf")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_circle
+		(center 0 0)
+		(end 2.794 0)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "126dfa7b-ac92-4258-a69f-3823eae1df19")
+	)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 3.048 3.048)
+		(drill 3.048)
+		(layers "*.Cu" "*.Mask")
+		(uuid "3d31fb7a-d6a1-43b7-8070-382d8d29cf1a")
+	)
+	(embedded_fonts no)
+)

@@ -1,0 +1,78 @@
+(footprint "SPARKFUN-AESTHETICS_OSHW-LOGO-M_COPPER"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Open-Source Hardware (OSHW) Logo - Medium - Top Copper\n\nExposed copper logo for open-source hardware designs.\n\nDevices using:\n\n• OSHW_LOGO")
+	(property "Reference" ""
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "f9a49415-6ca3-43ad-8b7e-12006bf8ecc0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "c538fe7a-adec-49fb-91ec-23623906faa0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a8435f07-d5d1-4e12-a481-4c422cb981fb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "18544d17-18e1-4057-af34-fe81bcdcffd6")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_poly
+		(pts
+			(xy 0.456253 -1.731155) (xy 0.686517 -1.657461) (xy 0.90147 -1.546765) (xy 1.544319 -2.070947) (xy 2.070947 -1.544319)
+			(xy 1.546765 -0.90147) (xy 1.657461 -0.686517) (xy 1.731155 -0.456253) (xy 2.5564 -0.372471) (xy 2.5564 0.372471)
+			(xy 1.726849 0.45669) (xy 1.54403 0.898116) (xy 2.070947 1.544319) (xy 1.544319 2.070947) (xy 0.901484 1.546777)
+			(xy 0.619704 1.692011) (xy 0.20689 0.695413) (xy 0.531536 0.463601) (xy 0.620726 0.335902) (xy 0.680464 0.187343)
+			(xy 0.70518 0.029146) (xy 0.693603 -0.130551) (xy 0.646326 -0.283537) (xy 0.565789 -0.421919) (xy 0.45613 -0.538591)
+			(xy 0.322994 -0.627547) (xy 0.173234 -0.684204) (xy 0.014563 -0.705646) (xy -0.144865 -0.690774)
+			(xy -0.296836 -0.640349) (xy -0.433526 -0.556972) (xy -0.547914 -0.444922) (xy -0.634098 -0.309982)
+			(xy -0.68765 -0.159084) (xy -0.705283 -0.004638) (xy -0.626354 0.324166) (xy -0.53669 0.458355) (xy -0.414858 0.570967)
+			(xy -0.204203 0.688924) (xy -0.618435 1.688948) (xy -0.821394 1.594769) (xy -0.90323 1.5482) (xy -1.544319 2.070947)
+			(xy -2.070947 1.544319) (xy -1.54403 0.898116) (xy -1.726849 0.45669) (xy -2.5564 0.372471) (xy -2.5564 -0.372471)
+			(xy -1.726849 -0.45669) (xy -1.54403 -0.898116) (xy -2.070947 -1.544319) (xy -1.544319 -2.070947)
+			(xy -0.90147 -1.546765) (xy -0.686517 -1.657461) (xy -0.456253 -1.731155) (xy -0.372471 -2.5564)
+			(xy 0.372471 -2.5564)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill yes)
+		(layer "F.Cu")
+		(uuid "8813f7d7-99f1-469d-8f8e-20627e0d5760")
+	)
+	(embedded_fonts no)
+)

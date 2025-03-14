@@ -1,0 +1,173 @@
+(footprint "SPARKFUN-RESISTORS_AXIAL-0.1-KIT"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "AXIAL-0.1-KIT\n\nCommonly used for 1/4W through-hole resistors. 0.1\" pitch between holes.\n\nWarning: This is the KIT version of the AXIAL-0.1 package. This package has a smaller diameter top stop mask, which doesn't cover the diameter of the pad. This means only the bottom side of the pads' copper will be exposed. You'll only be able to solder to the bottom side.")
+	(property "Reference" "REF**"
+		(at 0 -1.143 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "a2feb00c-b171-45c7-a684-37d57befbcc4")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify bottom)
+		)
+	)
+	(property "Value" "SPARKFUN-RESISTORS_AXIAL-0.1-KIT"
+		(at 0 1.143 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "e05543bd-bd42-4385-b237-c89beef8ac21")
+		(effects
+			(font
+				(size 0.48768 0.48768)
+				(thickness 0.12192)
+			)
+			(justify top)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6a79dedb-211d-4251-863f-457b13ebfa84")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fc8e4466-b0cd-461e-9f8e-a06ae2755c35")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_circle
+		(center -1.27 0)
+		(end -1.0414 0)
+		(stroke
+			(width 0.4572)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Mask")
+		(uuid "823843c9-e48c-4c4a-9591-698e974363a0")
+	)
+	(fp_circle
+		(center -1.27 0)
+		(end -1.0414 0)
+		(stroke
+			(width 0.4572)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Mask")
+		(uuid "997eca06-a8af-40bf-b258-661894b04a15")
+	)
+	(fp_circle
+		(center 1.27 0)
+		(end 1.4986 0)
+		(stroke
+			(width 0.4572)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Mask")
+		(uuid "d615b702-27f3-4a39-b84c-7d310a5198a6")
+	)
+	(fp_circle
+		(center -1.27 0)
+		(end -0.762 0)
+		(stroke
+			(width 1.016)
+			(type solid)
+		)
+		(fill yes)
+		(layer "B.Mask")
+		(uuid "fa1f501c-0e00-4bcb-a99f-532a0b8ad659")
+	)
+	(fp_circle
+		(center 1.27 0)
+		(end 1.778 0)
+		(stroke
+			(width 1.016)
+			(type solid)
+		)
+		(fill yes)
+		(layer "B.Mask")
+		(uuid "ccc9ce8c-f3ad-4a7a-9825-98fcddc4e1a0")
+	)
+	(fp_line
+		(start 0 0)
+		(end -0.254 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "62bc9893-af8d-4c80-8d39-f6da2111d470")
+	)
+	(fp_line
+		(start 0 0)
+		(end 0 -0.762)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "082deaab-078a-4638-8c96-c13138d4d40e")
+	)
+	(fp_line
+		(start 0 0.762)
+		(end 0 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6f16c33e-915f-44fb-a6ca-263ab639860c")
+	)
+	(fp_line
+		(start 0.254 0)
+		(end 0 0)
+		(stroke
+			(width 0.2032)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d91f2635-a90c-45cc-afb0-473d09d2828c")
+	)
+	(pad "P$1" thru_hole circle
+		(at -1.27 0)
+		(size 1.8796 1.8796)
+		(drill 0.9)
+		(layers "*.Cu")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "88901908-4593-4c3f-8563-50f73e1a34b9")
+	)
+	(pad "P$2" thru_hole circle
+		(at 1.27 0)
+		(size 1.8796 1.8796)
+		(drill 0.9)
+		(layers "*.Cu")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.1016)
+		(thermal_bridge_angle 0)
+		(uuid "ac1d06fd-9fe1-4178-98d7-1155158f334c")
+	)
+	(embedded_fonts no)
+)
