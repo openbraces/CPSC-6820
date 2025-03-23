@@ -4,10 +4,11 @@
 
 namespace ui {
 enum Menus {
+  MAIN,
   WIFI,
   CLOCK,
   SCHEDULE
-}
+};
 
 char string_output[256]; // I just set it to 256 chars because that should be enough
 
@@ -20,7 +21,8 @@ int next_set_hour = 0;
 int next_set_minute = 0;
 bool overall_status = true;
 
-Menus current_menu;
+Menus current_menu = MAIN; // (Default MAIN)
+Menus current_selection = WIFI; // This is for the homescreen where the user would select which menu it wants to select (Default WIFI)
 
 void    init() {
   DinMeter.Display.setRotation(1);
@@ -40,7 +42,7 @@ std::string format_wifi_string(bool wifi_enabled) {
   return wifi_enabled ? "ON" : "OFF";
 }
 
-void update_header_string(char* header_str) {
+std::string update_header_string() {
   std::string status_str = format_overall_status(overall_status);
   std::string current_time_str = format_time_string(current_hour, current_minute);
   std::string previous_time_str = format_time_string(previous_hour, previous_minute);
@@ -54,14 +56,29 @@ void update_header_string(char* header_str) {
                                    next_time_str, 
                                    status_str);
 
-  std::strncpy(header_str, header.c_str(), 255);
-  header_str[255] = '\0';
+  return header;
 }
 
-void update_output_string(char* string_output) {
-  char header_string[64];
-  update_header_string(header_string);
+std::string update_main_menu_string(Menus current_selection) {
+  // Adds a > if the the line is the current_selection
+  std::string wifi_line = (current_selection == WIFI) ? "> WiFi\n" : "WiFi\n";
+  std::string clock_line = (current_selection == CLOCK) ? "> Clock\n" : "Clock\n";
+  std::string schedule_line = (current_selection == SCHEDULE) ? "> Schedule\n" : "Schedule\n";
 
+  std::string menu = std::format("PawPlans\n{}{}{}", wifi_line, clock_line, schedule_line);
+
+  return menu;
+}
+
+std::string update_output_string() {
+  std::string header_string = update_header_string();
+  std::string main_menu_string = update_main_menu_string();
+  update_header_string(header_string);
+  update_main_menu_string(current_selection);
+
+  if (current_menu == MAIN) {
+    return std::format("{}\n{}", header_string, main_menu_string);
+  }
 }
 
 void update() {
