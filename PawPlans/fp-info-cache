@@ -1,4 +1,4 @@
-24977581190289338
+24984485987157288
 Adafruit_Joystick_512
 ADAFRUIT_ADAFRUIT200MIL
 
@@ -66191,6 +66191,41 @@ Yellow 5381 Series LED
 0
 2
 2
+M5Stack
+STAMP-C3
+https://docs.m5stack.com/en/core/stamp_c3
+stamp-c3,stamp-c3u,esp32-c3
+0
+45
+22
+M5Stack
+STAMP-PICO
+https://docs.m5stack.com/en/core/stamp_pico
+stamp-pico,esp32-pico-d4
+0
+36
+21
+M5Stack
+STAMP-S3-1_27-SOCKET
+https://docs.m5stack.com/en/core/StampS3, https://shop.m5stack.com/products/1-27-header-bus-socket-smd-for-m5stamps3-10-sets
+stamp-s3,esp32-s3
+0
+28
+28
+M5Stack
+STAMP-S3-DIP
+https://docs.m5stack.com/en/core/StampS3
+stamp-s3,esp32-s3
+0
+28
+28
+M5Stack
+STAMP-S3-SMD
+https://docs.m5stack.com/en/core/StampS3
+stamp-s3,esp32-s3
+0
+31
+31
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -93827,13 +93862,6 @@ Logo WEEE
 0
 0
 0
-TDK_Piezo_Buzzer_PS1240P02BT
-XTAL_PS1240P02BT_TDK
-
-PS1240P02BT 
-0
-2
-2
 TerminalBlock
 TerminalBlock_Altech_AK300-2_P5.00mm
 Altech AK300 terminal block, pitch 5.0mm, 45 degree angled, see http://www.mouser.com/ds/2/16/PCBMETRC-24178.pdf

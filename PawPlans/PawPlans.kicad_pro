@@ -479,16 +479,16 @@
         "schematic_color": "rgb(255, 0, 0)"
       },
       {
+        "name": "5V",
+        "pcb_color": "rgb(0, 0, 255)",
+        "priority": 2,
+        "schematic_color": "rgb(255, 0, 0)"
+      },
+      {
         "name": "GND",
         "pcb_color": "rgb(0, 0, 255)",
         "priority": 0,
         "schematic_color": "rgb(0, 0, 255)"
-      },
-      {
-        "name": "VCC",
-        "pcb_color": "rgb(0, 0, 255)",
-        "priority": 2,
-        "schematic_color": "rgb(255, 0, 0)"
       }
     ],
     "meta": {
@@ -506,11 +506,11 @@
         "pattern": "/GND"
       },
       {
-        "netclass": "VCC",
+        "netclass": "5V",
         "pattern": "VCC"
       },
       {
-        "netclass": "VCC",
+        "netclass": "5V",
         "pattern": "/VCC"
       }
     ]

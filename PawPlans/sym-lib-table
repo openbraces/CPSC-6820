@@ -6,4 +6,5 @@
   (lib (name "Ultrasonic_Proximity_Sensor_HC-SR04")(type "KiCad")(uri "${KIPRJMOD}/Symbols/Ultrasonic_Proximity_Sensor_HC-SR04.kicad_sym")(options "")(descr ""))
   (lib (name "SparkFun_HX711_Load_Cell_Amplifier_SEN-13879")(type "KiCad")(uri "${KIPRJMOD}/Symbols/SparkFun_HX711_Load_Cell_Amplifier_SEN-13879.kicad_sym")(options "")(descr ""))
   (lib (name "Murata_SMD_Buzzer_PKMCS0909E4000-R1")(type "KiCad")(uri "${KIPRJMOD}/Symbols/Murata_SMD_Buzzer_PKMCS0909E4000-R1.kicad_sym")(options "")(descr ""))
+  (lib (name "M5Stack")(type "KiCad")(uri "${KIPRJMOD}/Symbols/M5Stack.kicad_sym")(options "")(descr ""))
 )
