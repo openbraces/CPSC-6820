@@ -24,8 +24,6 @@ enum All_Selections {
   VIEW,
 }
 
-char string_output[256]; // I just set it to 256 chars because that should be enough
-
 bool wifi_enabled = false;
 int current_hour = 0;
 int current_minute = 0;
@@ -206,8 +204,9 @@ std::string update_output_string() {
 void update() {
   DinMeter.Speaker.tone(8000, 20);
   DinMeter.Display.clear();
-  Serial.println(string_output); // For debugging
-  DinMeter.Display.drawString(string_output,
+  std::string output_string = update_output_string();
+  Serial.println(output_string); // For debugging
+  DinMeter.Display.drawString(output_string,
                               0,
                               0); // x = 0, y = 0 should be top left of screen
 
