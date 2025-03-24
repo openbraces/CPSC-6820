@@ -18,7 +18,10 @@ enum All_Selections {
   HOURS,
   MINUTES,
   SET,
-  CANCEL
+  CANCEL,
+  ADD,
+  DELETE,
+  VIEW,
 }
 
 char string_output[256]; // I just set it to 256 chars because that should be enough
@@ -31,6 +34,15 @@ int previous_set_minute = 0;
 int next_set_hour = 0;
 int next_set_minute = 0;
 bool overall_status = true;
+
+// For adding a time to the schedule
+int add_time_hour = 0;
+int add_time_minute = 0;
+
+// For dealing with schedule times
+int current_time_selection = 0; // current time selected in schedule 
+int times[][2]; // all times in schedule
+int num_times = 0; // number of times in the schedule
 
 Menus current_menu = MAIN; // (Default MAIN)
 All_Selections current_selection = WIFI; // This will represent any selection the user makes
@@ -107,6 +119,60 @@ std::string update_clock_menu_string(All_Selections current_selection) {
   return menu;
 }
 
+std::string update_schedule_menu_string(All_Selections current_selection) {
+  std::string add_line = (current_selection == ADD) ? "> Add\n" : "Add\n";
+  std::string delete_line = (current_selection == DELETE) ? "> Delete\n" : "Delete\n";
+  std::string view_line = (current_selection == VIEW) ? "> View\n" : "View\n";
+  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
+
+  std::string menu = std::format("Schedule\n{}{}{}", add_line, delete_line, view_line, cancel_line);
+  return menu;
+}
+
+std::string update_add_time_menu_string(All_Selections current_selection, int new_hour, int new_minute) {
+  std::string new_time_str = format_time_string(new_hour, new_minute);
+  std::string time_line;
+
+  if (current_selection == HOURS) {
+    time_line = std::format("> [{}]:{}\n", new_time_str.substr(0, 2), new_time_str.substr(3, 2));
+  }
+  else if (current_selection == MINUTES) {
+    time_line = std::format("> {}:[{}]\n", new_time_str.substr(0, 2), new_time_str.substr(3, 2));
+  }
+  else {
+    time_line = std::format("{}\n", new_time_str);
+  }
+
+  std::string set_line = (current_selection == SET) ? "> Set\n" : "Set\n";
+  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
+
+  std::string menu = std::format("Add time\n{}{}{}", time_line, set_line, cancel_line);
+  return menu;
+}
+
+// This takes an int as current_selection since it is the index of the time
+std::string update_delete_time_menu_string(int current_time_selection, int times[][2], int num_times) {
+  std::string menu = "Delete time\n";
+  for (int i = 0; i < num_times; i++) {
+      std::string time_str = format_time_string(times[i][0], times[i][1]);
+      if (current_selection == i) {
+          menu += std::format("> {}\n", time_str);
+      } else {
+          menu += std::format("{}\n", time_str);
+      }
+  }
+  return menu;
+}
+
+std::string update_view_times_menu_string(int times[][2], int num_times) {
+  std::string menu = "View times\n";
+  for (int i = 0; i < num_times; i++) {
+      std::string time_str = format_time_string(times[i][0], times[i][1]);
+      menu += std::format("{}\n", time_str);
+  }
+  return menu;
+}
+
 std::string update_output_string() {
   std::string header_string = update_header_string();
   update_header_string(header_string);
@@ -123,7 +189,17 @@ std::string update_output_string() {
       std::string clock_menu_string = update_clock_menu_string(current_selection);
       return std::format("{}\n{}", header_string, clock_menu_string);
     case SCHEDULE:
-      return 0;
+      std::string schedule_menu_string = update_schedule_menu_string(current_selection);
+      return std::format("{}\n{}", header_string, schedule_menu_string);
+    case ADD:
+      std::string add_time_menu_string = update_add_time_menu_string(current_selection, add_time_hour, add_time_minute);
+      return std::format("{}\n{}", header_string, add_time_menu_string);
+    case DELETE:
+      std::string delete_time_menu_string = update_delete_time_menu_string(current_time_selection, times, num_times);
+      return std::format("{}\n{}", header_string, delete_time_menu_string);
+    case VIEW:
+      std::string view_times_menu_string = update_view_times_menu_string(times, num_times);
+      return std::format("{}\n{}", header_string, view_times_menu_string);
   }
 }
 
