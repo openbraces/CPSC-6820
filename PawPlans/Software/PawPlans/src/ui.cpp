@@ -8,6 +8,8 @@ inline const auto UI_SELECTION_PREFIX = '<';
 bool wifi_enabled   = false;
 bool overall_status = true;
 
+enum { ROOT, WIFI, CLOCK, SCHEDULE } current_menu = ROOT;
+
 void init() {
   DinMeter.Display.setRotation(1);
   DinMeter.Display.setTextColor(GREEN);
@@ -87,7 +89,15 @@ class root : menu {
     switch (event) {
     case SELECT:
       switch (selection) {
-        // Write selection cases
+        // Wifi case
+        case 0:
+          current_menu = WIFI;
+        // Clock case
+        case 1:
+          current_menu = CLOCK;
+        // Schedule case
+        case 2:
+          current_menu = SCHEDULE;
       }
       break;
 
@@ -186,17 +196,7 @@ class clock : menu {
       }
     // Cancel
     case 2:
-      switch (event) {
-      case SELECT:
-        scheduling::set_system_time(time.hours, time.minutes);
-        break;
-      case FORWARD:
-        increment_selection();
-        break;
-      case BACKWARD:
-        decrement_selection();
-        break;
-      }
+      current_menu = ROOT;
     }
 
     sprintf(hours, "%s%02d%s",
