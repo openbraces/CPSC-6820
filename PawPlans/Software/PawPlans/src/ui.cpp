@@ -1,213 +1,252 @@
 #include "M5DinMeter.h"
-#include <string>
-#include <cstring>
+
+#include "scheduling.hpp"
 
 namespace ui {
-enum Menus {
-  MAIN,
-  WIFI,
-  CLOCK,
-  SCHEDULE
-};
+inline const auto UI_SELECTION_PREFIX = '<';
 
-enum All_Selections {
-  MAIN,
-  WIFI,
-  CLOCK,
-  SCHEDULE,
-  HOURS,
-  MINUTES,
-  SET,
-  CANCEL,
-  ADD,
-  DELETE,
-  VIEW,
-}
-
-bool wifi_enabled = false;
-int current_hour = 0;
-int current_minute = 0;
-int previous_set_hour = 0;
-int previous_set_minute = 0;
-int next_set_hour = 0;
-int next_set_minute = 0;
+bool wifi_enabled   = false;
 bool overall_status = true;
 
-// For adding a time to the schedule
-int add_time_hour = 0;
-int add_time_minute = 0;
-
-// For dealing with schedule times
-int current_time_selection = 0; // current time selected in schedule 
-int times[][2]; // all times in schedule
-int num_times = 0; // number of times in the schedule
-
-Menus current_menu = MAIN; // (Default MAIN)
-All_Selections current_selection = WIFI; // This will represent any selection the user makes
-
-void    init() {
+void init() {
   DinMeter.Display.setRotation(1);
   DinMeter.Display.setTextColor(GREEN);
   DinMeter.Display.setTextDatum(middle_center);
   DinMeter.Display.setTextFont(&fonts::Roboto_Thin_24);
   DinMeter.Display.setTextSize(2);
 
-  encpos = DinMeter.Encoder.read();
+  auto encpos = DinMeter.Encoder.read();
 }
 
-std::string format_time_string(int hour, int minute) {
-  return std::format("{:02d}:{:02d}", hour, minute);
+char *format_time(scheduling::time time) {
+  char time_string[5];
+  sprintf(time_string, "%02d:%02d", time.hours, time.minutes);
+
+  return time_string;
 }
 
-std::string format_wifi_string(bool wifi_enabled) {
-  return wifi_enabled ? "ON" : "OFF";
-}
+inline const auto max = [](int8_t x, int8_t y) { return x > y ? x : y; };
+inline const auto min = [](int8_t x, int8_t y) { return x < y ? y : x; };
+namespace menus {
+class menu {
+public:
+  static const inline int8_t MAX_MENU_ENTRIES = 8, MAX_LINE_LENGTH = 64;
+  static const inline char   selection_prefix = '>';
 
-std::string update_header_string() {
-  std::string status_str = format_overall_status(overall_status);
-  std::string current_time_str = format_time_string(current_hour, current_minute);
-  std::string previous_time_str = format_time_string(previous_hour, previous_minute);
-  std::string next_time_str = format_time_string(next_hour, next_minute);
-  std::string wifi_str = format_wifi_string(wifi_enabled);
+  typedef enum event { SELECT, FORWARD, BACKWARD } event;
 
-  std::string header = std::format("WiFi {} T {} PRE {} NXT {} {}", 
-                                   wifi_str, 
-                                   current_time_str, 
-                                   previous_time_str, 
-                                   next_time_str, 
-                                   status_str);
+  char   title[MAX_LINE_LENGTH];
+  char   entries[MAX_LINE_LENGTH][MAX_MENU_ENTRIES];
+  char   render_string[(MAX_LINE_LENGTH + 1) * MAX_MENU_ENTRIES];
+  int8_t selection;
+  int8_t count;
 
-  return header;
-}
-
-std::string update_main_menu_string(All_Selections current_selection) {
-  // Adds a > if the the line is the current_selection
-  std::string wifi_line = (current_selection == WIFI) ? "> WiFi\n" : "WiFi\n";
-  std::string clock_line = (current_selection == CLOCK) ? "> Clock\n" : "Clock\n";
-  std::string schedule_line = (current_selection == SCHEDULE) ? "> Schedule\n" : "Schedule\n";
-
-  std::string menu = std::format("PawPlans\n{}{}{}", wifi_line, clock_line, schedule_line);
-
-  return menu;
-}
-
-std::string update_wifi_menu_string(All_Selections current_selection) {
-  std::string wifi_placeholder = "Wifi\nPlaceholder for wifi menu";
-  return wifi_placeholder;
-}
-
-std::string update_clock_menu_string(All_Selections current_selection) {
-  std::string current_time_str = format_time_string(current_hour, current_minute);
-  std::string time_line;
-
-  if (current_selection == HOURS) {
-    time_line = std::format("> [{}]:{}\n", current_time_str.substr(0, 2), current_time_str.substr(3, 2));
-  }
-  else if (current_selection == MINUTES) {
-    time_line = std::format("> {}:[{}]\n", current_time_str.substr(0, 2), current_time_str.substr(3, 2));
-  }
-  else {
-    time_line = std::format("{}\n", current_time_str);
+  // Render will be called each time during the event loop
+  void render(event event) {
+    // Internally, we call the update function that is defined by each menu
+    update(event);
+    // Writing the title first
+    sprintf(render_string, "%s\n", title);
+    for (int8_t i = 0; i < count; i++) {
+      // Beginning here, we append to the render_string, each line having one
+      // entry
+      if (i == selection)
+        sprintf(render_string + strlen(render_string), "%c %.*s\n",
+                selection_prefix, MAX_LINE_LENGTH - 2, entries[i]);
+      else
+        sprintf(render_string + strlen(render_string), "%.*s\n",
+                MAX_LINE_LENGTH, entries[i]);
+    }
   }
 
-  std::string set_line = (current_selection == SET) ? "> Set\n" : "Set\n";
-  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
+  // Move the selection marker on the entries forward
+  // Currently, the marker stops at the last entry even if the user keeps
+  // turning the encoder, this could be changed to start at the beginning again
+  void increment_selection() { selection = min(selection + 1, count - 1); }
 
-  std::string menu = std::format("Clock\n{}{}{}", time_line, set_line, cancel_line);
-  return menu;
-}
+  // Move the selection marker backward, similar logic as increment_selection()
+  void decrement_selection() { selection = max(selection - 1, 0); }
 
-std::string update_schedule_menu_string(All_Selections current_selection) {
-  std::string add_line = (current_selection == ADD) ? "> Add\n" : "Add\n";
-  std::string delete_line = (current_selection == DELETE) ? "> Delete\n" : "Delete\n";
-  std::string view_line = (current_selection == VIEW) ? "> View\n" : "View\n";
-  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
+  // Update function to adjust the entries of the list, needs to be defined by
+  // the specific menus
+  virtual void update(event event) = 0;
+};
 
-  std::string menu = std::format("Schedule\n{}{}{}", add_line, delete_line, view_line, cancel_line);
-  return menu;
-}
-
-std::string update_add_time_menu_string(All_Selections current_selection, int new_hour, int new_minute) {
-  std::string new_time_str = format_time_string(new_hour, new_minute);
-  std::string time_line;
-
-  if (current_selection == HOURS) {
-    time_line = std::format("> [{}]:{}\n", new_time_str.substr(0, 2), new_time_str.substr(3, 2));
+class header : menu {
+  void update(event event) {
+    sprintf(entries[0], "WiFi %s T %02d:%02d PRE %02d:%02d NXT %02d:%02d %s",
+            wifi_enabled ? "ON " : "OFF",
+            format_time(scheduling::get_current_time()),
+            format_time(scheduling::last_dispense),
+            format_time(scheduling::next_dispense),
+            overall_status ? "OK" : "ERR");
+    count = 1;
   }
-  else if (current_selection == MINUTES) {
-    time_line = std::format("> {}:[{}]\n", new_time_str.substr(0, 2), new_time_str.substr(3, 2));
-  }
-  else {
-    time_line = std::format("{}\n", new_time_str);
-  }
+};
 
-  std::string set_line = (current_selection == SET) ? "> Set\n" : "Set\n";
-  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
-
-  std::string menu = std::format("Add time\n{}{}{}", time_line, set_line, cancel_line);
-  return menu;
-}
-
-// This takes an int as current_selection since it is the index of the time
-std::string update_delete_time_menu_string(int current_time_selection, int times[][2], int num_times) {
-  std::string menu = "Delete time\n";
-  for (int i = 0; i < num_times; i++) {
-      std::string time_str = format_time_string(times[i][0], times[i][1]);
-      if (current_selection == i) {
-          menu += std::format("> {}\n", time_str);
-      } else {
-          menu += std::format("{}\n", time_str);
+class root : menu {
+  void update(event event) {
+    switch (event) {
+    case SELECT:
+      switch (selection) {
+        // Write selection cases
       }
-  }
-  return menu;
-}
+      break;
 
-std::string update_view_times_menu_string(int times[][2], int num_times) {
-  std::string menu = "View times\n";
-  for (int i = 0; i < num_times; i++) {
-      std::string time_str = format_time_string(times[i][0], times[i][1]);
-      menu += std::format("{}\n", time_str);
+    case FORWARD:
+      increment_selection();
+      break;
+    case BACKWARD:
+      increment_selection();
+      break;
+    }
+    sprintf(title, "PawPlans");
+    sprintf(entries[0], "WiFi");
+    sprintf(entries[1], "Clock");
+    sprintf(entries[2], "Schedule");
+    count = 3;
   }
-  return menu;
-}
+};
 
-std::string update_output_string() {
-  std::string header_string = update_header_string();
-  update_header_string(header_string);
-
-  switch(current_menu) {
-    case MAIN:
-      std::string main_menu_string = update_main_menu_string(current_selection);
-      update_main_menu_string(current_selection);
-      return std::format("{}\n{}", header_string, main_menu_string);
-    case WIFI:
-      std::string wifi_menu_string = update_wifi_menu_string(current_selection);
-      return std::format("{}\n{}", header_string, wifi_menu_string);
-    case CLOCK:
-      std::string clock_menu_string = update_clock_menu_string(current_selection);
-      return std::format("{}\n{}", header_string, clock_menu_string);
-    case SCHEDULE:
-      std::string schedule_menu_string = update_schedule_menu_string(current_selection);
-      return std::format("{}\n{}", header_string, schedule_menu_string);
-    case ADD:
-      std::string add_time_menu_string = update_add_time_menu_string(current_selection, add_time_hour, add_time_minute);
-      return std::format("{}\n{}", header_string, add_time_menu_string);
-    case DELETE:
-      std::string delete_time_menu_string = update_delete_time_menu_string(current_time_selection, times, num_times);
-      return std::format("{}\n{}", header_string, delete_time_menu_string);
-    case VIEW:
-      std::string view_times_menu_string = update_view_times_menu_string(times, num_times);
-      return std::format("{}\n{}", header_string, view_times_menu_string);
+class wifi : menu {
+  void update(event event) {
+    sprintf(title, "WiFi");
+    sprintf(entries[0], "TBD");
+    count = 1;
   }
-}
+};
+
+class clock : menu {
+  static inline const char sub_selection_prefix[] = "[",
+                           sub_selection_suffix[] = "]";
+
+  scheduling::time time = scheduling::get_current_time();
+
+  void update(event event) {
+    static char hours[4], minutes[4];
+    enum { HOURS, MINUTES, DESELECT } time_selection = DESELECT;
+
+    // Menu entry switch
+    switch (selection) {
+    // Time setting
+    case 0:
+      // Event switch
+      switch (event) {
+      case SELECT:
+        switch (time_selection) {
+        case DESELECT:
+          time_selection = HOURS;
+          break;
+        case HOURS:
+          time_selection = MINUTES;
+          break;
+        case MINUTES:
+          time_selection = DESELECT;
+          break;
+        }
+        break;
+      case FORWARD:
+        switch (time_selection) {
+        case DESELECT:
+          increment_selection();
+          break;
+        case HOURS:
+          time.hours = min(time.hours + 1, 0);
+          break;
+        case MINUTES:
+          time.minutes = min(time.minutes - 1, 0);
+          break;
+        }
+        break;
+      case BACKWARD:
+        switch (time_selection) {
+        case DESELECT:
+          decrement_selection();
+          break;
+        case HOURS:
+          time.hours = max(time.hours - 1, 0);
+          break;
+        case MINUTES:
+          time.minutes = max(time.minutes - 1, 0);
+          break;
+        }
+        break;
+      }
+      break;
+    // Set
+    case 1:
+      switch (event) {
+      case SELECT:
+        scheduling::set_system_time(time.hours, time.minutes);
+        break;
+      case FORWARD:
+        increment_selection();
+        break;
+      case BACKWARD:
+        decrement_selection();
+        break;
+      }
+    // Cancel
+    case 2:
+      switch (event) {
+      case SELECT:
+        scheduling::set_system_time(time.hours, time.minutes);
+        break;
+      case FORWARD:
+        increment_selection();
+        break;
+      case BACKWARD:
+        decrement_selection();
+        break;
+      }
+    }
+
+    sprintf(hours, "%s%02d%s",
+            time_selection == HOURS ? sub_selection_prefix : "", time.hours,
+            time_selection == HOURS ? sub_selection_suffix : "");
+    sprintf(minutes, "%s%02d%s",
+            time_selection == MINUTES ? sub_selection_prefix : "", time.minutes,
+            time_selection == MINUTES ? sub_selection_suffix : "");
+
+    sprintf(title, "Clock");
+    sprintf(entries[0], "%s:%s", hours, minutes);
+    sprintf(entries[1], "Set");
+    sprintf(entries[2], "Cancel");
+    count = 3;
+  }
+};
+
+class schedule : menu {
+  void update(event event) {
+    switch (event) {
+    case SELECT:
+      switch (selection) {
+        // Write selection cases
+      }
+      break;
+
+    case FORWARD:
+      increment_selection();
+      break;
+    case BACKWARD:
+      increment_selection();
+      break;
+    }
+    sprintf(title, "Schedule");
+    sprintf(entries[0], "Add");
+    sprintf(entries[1], "View");
+    sprintf(entries[2], "Delete");
+    sprintf(entries[3], "Cancel");
+    count = 4;
+  }
+};
+} // namespace menus
 
 void update() {
   DinMeter.Speaker.tone(8000, 20);
   DinMeter.Display.clear();
-  std::string output_string = update_output_string();
-  Serial.println(output_string); // For debugging
-  DinMeter.Display.drawString(output_string,
-                              0,
+  Serial.println(); // For debugging
+  DinMeter.Display.drawString("", 0,
                               0); // x = 0, y = 0 should be top left of screen
 
   if (DinMeter.BtnA.wasPressed()) {
