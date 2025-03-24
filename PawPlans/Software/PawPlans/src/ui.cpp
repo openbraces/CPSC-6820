@@ -59,13 +59,11 @@ public:
     }
   }
 
-  // Move the selection marker on the entries forward
-  // Currently, the marker stops at the last entry even if the user keeps
-  // turning the encoder, this could be changed to start at the beginning again
-  void increment_selection() { selection = min(selection + 1, count - 1); }
+  // Move the selection marker on the entries forward reseting the selection to 0 when past count - 1
+  void increment_selection() { selection = (selection + 1) % count; }
 
   // Move the selection marker backward, similar logic as increment_selection()
-  void decrement_selection() { selection = max(selection - 1, 0); }
+  void decrement_selection() { selection = (selection - 1) % count; }
 
   // Update function to adjust the entries of the list, needs to be defined by
   // the specific menus
