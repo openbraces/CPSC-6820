@@ -10,6 +10,17 @@ enum Menus {
   SCHEDULE
 };
 
+enum All_Selections {
+  MAIN,
+  WIFI,
+  CLOCK,
+  SCHEDULE,
+  HOURS,
+  MINUTES,
+  SET,
+  CANCEL
+}
+
 char string_output[256]; // I just set it to 256 chars because that should be enough
 
 bool wifi_enabled = false;
@@ -22,7 +33,7 @@ int next_set_minute = 0;
 bool overall_status = true;
 
 Menus current_menu = MAIN; // (Default MAIN)
-Menus current_selection = WIFI; // This is for the homescreen where the user would select which menu it wants to select (Default WIFI)
+All_Selections current_selection = WIFI; // This will represent any selection the user makes
 
 void    init() {
   DinMeter.Display.setRotation(1);
@@ -59,7 +70,7 @@ std::string update_header_string() {
   return header;
 }
 
-std::string update_main_menu_string(Menus current_selection) {
+std::string update_main_menu_string(All_Selections current_selection) {
   // Adds a > if the the line is the current_selection
   std::string wifi_line = (current_selection == WIFI) ? "> WiFi\n" : "WiFi\n";
   std::string clock_line = (current_selection == CLOCK) ? "> Clock\n" : "Clock\n";
@@ -70,14 +81,49 @@ std::string update_main_menu_string(Menus current_selection) {
   return menu;
 }
 
+std::string update_wifi_menu_string(All_Selections current_selection) {
+  std::string wifi_placeholder = "Wifi\nPlaceholder for wifi menu";
+  return wifi_placeholder;
+}
+
+std::string update_clock_menu_string(All_Selections current_selection) {
+  std::string current_time_str = format_time_string(current_hour, current_minute);
+  std::string time_line;
+
+  if (current_selection == HOURS) {
+    time_line = std::format("> [{}]:{}\n", current_time_str.substr(0, 2), current_time_str.substr(3, 2));
+  }
+  else if (current_selection == MINUTES) {
+    time_line = std::format("> {}:[{}]\n", current_time_str.substr(0, 2), current_time_str.substr(3, 2));
+  }
+  else {
+    time_line = std::format("{}\n", current_time_str);
+  }
+
+  std::string set_line = (current_selection == SET) ? "> Set\n" : "Set\n";
+  std::string cancel_line = (current_selection == CANCEL) ? "> Cancel\n" : "Cancel\n";
+
+  std::string menu = std::format("Clock\n{}{}{}", time_line, set_line, cancel_line);
+  return menu;
+}
+
 std::string update_output_string() {
   std::string header_string = update_header_string();
-  std::string main_menu_string = update_main_menu_string();
   update_header_string(header_string);
-  update_main_menu_string(current_selection);
 
-  if (current_menu == MAIN) {
-    return std::format("{}\n{}", header_string, main_menu_string);
+  switch(current_menu) {
+    case MAIN:
+      std::string main_menu_string = update_main_menu_string(current_selection);
+      update_main_menu_string(current_selection);
+      return std::format("{}\n{}", header_string, main_menu_string);
+    case WIFI:
+      std::string wifi_menu_string = update_wifi_menu_string(current_selection);
+      return std::format("{}\n{}", header_string, wifi_menu_string);
+    case CLOCK:
+      std::string clock_menu_string = update_clock_menu_string(current_selection);
+      return std::format("{}\n{}", header_string, clock_menu_string);
+    case SCHEDULE:
+      return 0;
   }
 }
 
@@ -95,6 +141,5 @@ void update() {
   if (DinMeter.BtnA.pressedFor(5000)) {
     DinMeter.Encoder.write(100);
   }
-  DinMeter.Display.
 }
 } // namespace ui
