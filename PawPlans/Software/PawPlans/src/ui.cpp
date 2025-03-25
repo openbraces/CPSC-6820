@@ -8,39 +8,32 @@ namespace ui {
 bool wifi_status   = false;
 bool system_status = true;
 
-struct {
-  menu::header   header;
-  menu::root     root;
-  menu::wifi     wifi;
-  menu::clock    clock;
-  menu::schedule schedule;
+menu::header   header;
+menu::root     root;
+menu::wifi     wifi;
+menu::clock    clock;
+menu::schedule schedule;
 
-  menutype current_menu = ROOT;
-  char     render_string[(MAX_LINE_LENGTH + 1) * MAX_MENU_ENTRIES];
+menutype current_menu = ROOT;
 
-  void render(menu::input_event event) {
-    switch (current_menu) {
-    case ROOT:
-      root.render(event);
-      strcpy(render_string, root.render_string);
-      break;
-    case WIFI:
-      wifi.render(event);
-      strcpy(render_string, wifi.render_string);
-      break;
-    case CLOCK:
-      clock.render(event);
-      strcpy(render_string, clock.render_string);
-      break;
-    case SCHEDULE:
-      schedule.render(event);
-      strcpy(render_string, schedule.render_string);
-      break;
-    default:
-      break;
-    }
+void render(menu::input_event event) {
+  strcpy(render_string, "");
+  header.render(event);
+  switch (current_menu) {
+  case ROOT:
+    root.render(event);
+    break;
+  case WIFI:
+    wifi.render(event);
+    break;
+  case CLOCK:
+    clock.render(event);
+    break;
+  case SCHEDULE:
+    schedule.render(event);
+    break;
   }
-} menu_instance;
+}
 
 void init() {
   DinMeter.Display.setRotation(1);
@@ -53,10 +46,10 @@ void init() {
 }
 
 void update() {
-  menu_instance.render(menu::input_event::SELECT);
+  render(menu::input_event::SELECT);
   DinMeter.Display.clear();
-  Serial.println();
-  DinMeter.Display.drawString(menu_instance.render_string, 0, 0);
+  Serial.println(render_string);
+  DinMeter.Display.drawString(render_string, 0, 0);
 }
 
 void format_time(scheduling::time time, char time_string[5]) {
