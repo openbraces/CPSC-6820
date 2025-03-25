@@ -1,5 +1,6 @@
 #include "M5DinMeter.h"
 
+#include "io.hpp"
 #include "menu.hpp"
 #include "scheduling.hpp"
 #include "ui.hpp"
