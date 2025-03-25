@@ -3,9 +3,9 @@
 #include "scheduling.hpp"
 
 namespace scheduling {
-entry   schedule[MAX_SCHEDULE_ENTRIES];
-uint8_t count = 0;
-time    last_dispense, next_dispense;
+struct entry schedule[MAX_SCHEDULE_ENTRIES];
+uint8_t      count = 0;
+struct time  last_dispense, next_dispense;
 
 int compare_schedule_entries(const void *x, const void *y) {
   const auto xtime = ((const entry *)x)->time, ytime = ((const entry *)y)->time;
@@ -74,10 +74,4 @@ status evaluate() {
 
   return OK;
 }
-
-status cleanup() {
-  free(schedule);
-  return OK;
-}
-
 } // namespace scheduling

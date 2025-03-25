@@ -2,11 +2,10 @@
 #define SCHEDULING_H
 
 #include <M5DinMeter.h>
-#include <stdint.h>
 
 namespace scheduling {
 // Maximum number of schedule entries
-inline const uint8_t MAX_SCHEDULE_ENTRIES = 16;
+const uint8_t MAX_SCHEDULE_ENTRIES = 16;
 
 // Schedule time
 typedef struct time {
@@ -16,11 +15,11 @@ typedef struct time {
 
 // Schedule entry
 typedef struct entry {
-  time  time;    // Time of the day
-  float portion; // Portion size for the schedule
+  struct time time;    // Time of the day
+  float       portion; // Portion size for the schedule
 } entry;
 
-extern entry  *schedule;
+extern entry   schedule[MAX_SCHEDULE_ENTRIES];
 extern uint8_t count;
 extern time    last_dispense, next_dispense;
 
@@ -45,9 +44,6 @@ status remove_schedule_entry(uint8_t index);
 
 // Evaluate the entries in the schedule and dispense food
 status evaluate();
-
-// Memory cleanup
-status cleanup();
 } // namespace scheduling
 
-#endif
+#endif // SCHEDULING_H
