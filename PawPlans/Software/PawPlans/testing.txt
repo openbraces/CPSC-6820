@@ -1,3 +1,7 @@
+Logan Swoyer - swoyer.logan@gmail.com
+Srriam Vishnubhotla - hexlambda@outlook.com
+Repo - https://github.com/hexlambda/CPSC-6820/
+
 Currently we have two testing modules, menu_test.cpp and scheduling_test.cpp
 
 menu_test.cpp
