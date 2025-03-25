@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 #include "M5DinMeter.h"
 
 void setup() {
@@ -7,6 +5,4 @@ void setup() {
   DinMeter.begin(cfg, true);
 }
 
-void loop() {
-  DinMeter.update();
-}
+void loop() { DinMeter.update(); }
