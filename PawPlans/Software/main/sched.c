@@ -313,7 +313,7 @@ static void sched_trigger_action(void) {
     return;
   }
 
-  set_servo_angle(curr_servo_angle == 0 ? 90 : 0);
+  servo_dispense(10);
 }
 
 void show_warning(const char *title, const char *msg) {

@@ -70,8 +70,8 @@
 #define SERVO_ANGLE_RANGE       (180)
 #define SERVO_TIMER_RES         (1000000) // in Hz
 #define SERVO_TIMER_PERIOD      (20000)   // ticks = 20 ms, period = 50 Hz
-#define SERVO_REST_ANGLE        (0)
-#define SERVO_DISPENSE_ANGLE    (90)
+#define SERVO_REST_ANGLE        (45)
+#define SERVO_DISPENSE_ANGLE    (0)
 #define SERVO_MIN_DELAY         (200)
 #define SERVO_MAX_DELAY         (2000)
 
